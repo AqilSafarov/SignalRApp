@@ -1,0 +1,47 @@
+﻿@model List<AppUser> 
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row">
+    <div class="col-md-6">
+        <div class="container">
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-2">User</div>
+                <div class="col-4"><input type="text" id="userInput" /></div>
+            </div>
+            <div class="row">
+                <div class="col-2">Message</div>
+                <div class="col-4"><input type="text" id="messageInput" /></div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-6">
+                    <input type="button" id="sendButton" value="Send Message" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ol id="userList">
+                @foreach (var item in Model)
+                {
+                <li data-id="@item.Id" style="color:@(item.IsConnected?"green":"gray")">@item.UserName @(item.IsConnected?" ": " - "+item.LastSeen.ToString("dd MM yyyy HH:mm"))</li>
+                }
+            </ol>
+        </div>
+    </div>
+    </div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.8/signalr.min.js" integrity="sha512-nERale4S3QuybfgFv0L+nk/8D55/5rNuDTewZkDsbVtFd0e5++Q7V9sQEG2yAfRfTQB0gyDGSC70lKV68PAgVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/chat.js"></script>
+}
